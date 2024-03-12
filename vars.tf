@@ -1,5 +1,5 @@
 variable "projectName" {
-  default     = "techchallenge"
+  default = "techchallenge"
 }
 
 variable "db_password" {
