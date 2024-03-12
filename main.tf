@@ -22,22 +22,22 @@ resource "aws_db_instance" "postgres_db" {
   identifier           = "rds-${var.projectName}"
   allocated_storage    = 5
   engine               = "postgres"
-  engine_version       = "16.1" 
+  engine_version       = "16.1"
   instance_class       = "db.t3.micro"
   username             = "postgres"
   password             = var.db_password
   parameter_group_name = "default.postgres16"
-  apply_immediately = true
+  apply_immediately    = true
   skip_final_snapshot  = true
   publicly_accessible  = false
   multi_az             = false
-  availability_zone = "us-east-1a"
+  availability_zone    = "us-east-1a"
 
   db_subnet_group_name = aws_db_subnet_group.postgres_subnet_group.name
 }
 
 resource "aws_db_subnet_group" "postgres_subnet_group" {
-  name = "postgres-subnet-group"
+  name       = "postgres-subnet-group"
   subnet_ids = [data.terraform_remote_state.infra.outputs.subnet1_id, data.terraform_remote_state.infra.outputs.subnet2_id]
 
   tags = {
